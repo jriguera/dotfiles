@@ -1,0 +1,4 @@
+Host github.com
+  HostName github.com
+  User jriguera@gmail.com
+  IdentityFile /home/jriguera/.ssh/id_rsa-my_00

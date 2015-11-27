@@ -1,0 +1,5 @@
+
+--options=coffee
+--options=ctags
+--options=gdbinit
+--options=m4

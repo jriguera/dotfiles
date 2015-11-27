@@ -1,0 +1,17 @@
+- clean: ['~']
+
+- shell:
+  - [git submodule update --init --recursive, "Updating submodules"]
+  - [mkdir -p ~/bin, "Creating bin folder"]
+  - [mkdir -p ~/.config, "Creating config folder"]
+  - [mkdir -p ~/devel, "Creating devel folder"]
+  - [sudo pip install --upgrade virtualenv virtualenvwrapper cookiecutter, "Installing virtualenv and cookiecutter"]
+  - [mkdir -p ~/devel/venv, "Creating venv project folder"]
+
+- link:
+    ~/.dotfiles: ''
+    ~/bin: bin
+    ~/.vim: vim/
+    ~/.vimrc: vimrc
+    ~/.tmux.conf: tmux.conf
+    ~/.ssh: ssh/
