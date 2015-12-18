@@ -50,7 +50,10 @@ color4 EF5A29
 color5 77B753
 
 # Loading lua script for drawning rings
-lua_load ~/.conky/rings.lua
+lua_load ~/.conky/rings4.lua
+${if_existing /sys/devices/system/cpu/cpu4}
+lua_load ~/.conky/rings8.lua
+{endif}
 lua_draw_hook_post main
 
 ## System information using conky capabilities
