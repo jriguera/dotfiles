@@ -1,4 +1,122 @@
+Host bitbucket.org
+  HostName bitbucket.org
+  User XXXX
+  IdentityFile ~/.ssh/XXXX
+
 Host github.com
   HostName github.com
-  User jriguera@gmail.com
-  IdentityFile /home/jriguera/.ssh/id_rsa-my_00
+  User XXXX
+  IdentityFile ~/.ssh/XXXX
+
+### default for all ##
+Host *
+    Protocol 2
+    ControlMaster auto
+    ControlPath ~/.ssh/multiplex/%r@%h:%p
+    ControlPersist 1
+    VisualHostKey yes
+    StrictHostKeyChecking ask
+    UserKnownHostsFile ~/.ssh/known_hosts
+    LogLevel INFO
+    ForwardAgent no
+    ForwardX11 no
+    ForwardX11Trusted yes
+    ServerAliveInterval 120
+    IdentityFile ~/.ssh/%r.id_rsa
+    IdentityFile ~/.ssh/id_rsa
+#   StrictHostKeyChecking no
+#   UserKnownHostsFile /dev/null
+
+# General Tweaks and Connection Items
+# Some other tweaks that you may wish to configure on a broad level,
+# perhaps in the Host * section, are below.
+#
+# - ServerAliveInterval: This option can be configured to let SSH know when to 
+# send a packet to test for a response from the sever. This can be useful if 
+# your connection is unreliable and you want to know if it is still available.
+# - LogLevel: This configures the level of detail in which SSH will log on the 
+# client-side. This can be used for turning off logging in certain situations or 
+# increasing the verbosity when trying to debug. From least to most verbose, the 
+# levels are QUIET, FATAL, ERROR, INFO, VERBOSE, DEBUG1, DEBUG2, and DEBUG3.
+# - StrictHostKeyChecking: This option configures whether ssh SSH will ever 
+# automatically add hosts to the ~/.ssh/known_hosts file. By default, this will 
+# be set to "ask" meaning that it will warn you if the Host Key received from the 
+# remote server does not match the one found in the known_hosts file. If you are 
+# constantly connecting to a large number of ephemeral hosts, you may want to 
+# turn this to "no". SSH will then automatically add any hosts to the file. This 
+# can have security implications, so think carefully before enabling it.
+# - UserKnownHostsFile: This option specifies the location where SSH will store 
+# the information about hosts it has connected to. Usually you do not have to 
+# worry about this setting, but you may wish to set this to /dev/null if you have 
+# turned off strict host checking above.
+# - VisualHostKey: This option can tell SSH to display an ASCII representation of 
+# the remote host's key upon connection. Turning this on can be an easy way to get 
+# familiar with your host's key, allowing you to easily recognize it if you have 
+# to connect from a different computer sometime in the future.
+# - Compression: Turning compression on can be helpful for very slow connections. 
+# Most users will not need this.
+
+# Connection Forwarding
+# One common use of SSH is forwarding connections, either allowing a local 
+# connection to tunnel through the remote host, or allowing the remote machine 
+# access to tunnel through the local machine. SSH can also do dynamic forwarding 
+# using protocols like SOCKS5 which include the forwarding information for the 
+# remote host.
+#
+# The options that control this behavior are:
+#
+# - LocalForward: This option is used to specify a connection that will forward a 
+# local port's traffic to the remote machine, tunneling it out into the remote 
+# network. The first argument should be the local port you wish to direct traffic 
+# to and the second argument should be the address and port that you wish to 
+# direct that traffic to on the remote end.
+# - RemoteForward: This option is used to define a remote port where traffic can be 
+# directed to in order to tunnel out of the local machine. The first argument should 
+# be the remote port where traffic will be directed on the remote system. The second 
+# argument should be the address and port to point the traffic to when it arrives on 
+# the local system.
+# - DynamicForward: This is used to configure a local port that can be used with a 
+# dynamic forwarding protocol like SOCKS5. Traffic using the dynamic forwarding 
+# protocol can then be directed at this port on the local machine and on the remote 
+# end, it will be routed according to the included values.
+
+## Forward all local port 3128 traffic to port 3128 on the remote.server ##
+## $ ssh -f -N  proxyus ##
+#Host proxyus
+#   HostName remote.server
+#   User breakfree
+#   IdentityFile ~/.ssh/remote.server.key
+#   LocalForward 3128 127.0.0.1:3128
+
+## $ ssh -f -N -L 9906:127.0.0.1:3306 coolio@database.example.com
+# -f puts ssh in background
+# -N makes it not execute a remote command
+# This will forward all local port 9906 traffic to port 3306 on 
+# the remote dev.example.com server, letting me point my desktop 
+# GUI to localhost (127.0.0.1:9906) and have it behave exactly as 
+# if I had exposed port 3306 on the remote server and connected 
+# directly to it.
+#Host tunnel
+#   HostName database.example.com
+#   IdentityFile ~/.ssh/coolio.example.key
+#   LocalForward 9906 127.0.0.1:3306
+#   User coolio
+
+# This will allow us to use port 8080 on the local machine
+# in order to access example.com at port 80 from the remote machine
+#Host local_to_remote
+#   LocalForward 8080 example.com:80
+
+# This will allow us to offer access to internal.com at port 443
+# to the remote machine through port 7777 on the other side
+#Host remote_to_local
+#   RemoteForward 7777 internal.com:443
+
+
+## Login to internal lan server at 192.168.0.251 via gw.example.com ##
+#Host nathost
+#   HostName 192.168.0.251
+#   User nixcraft
+#   ProxyCommand ssh -q -W %h:%p gw.example.com
+##  ProxyCommand ssh nixcraft@gw.example.com nc %h %p 2> /dev/null
+
