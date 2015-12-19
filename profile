@@ -60,3 +60,8 @@ if [ -n "$DISPLAY" ]; then
 else 
     export BROWSER=links
 fi
+
+# enable byobu
+if [ -r /usr/bin/byobu-launch ] ; then
+    _byobu_sourced=1 . /usr/bin/byobu-launch
+fi
