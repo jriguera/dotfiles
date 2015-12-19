@@ -1,17 +1,17 @@
-- clean: ['~']
+- clean: 
+  - '~'
 
 - shell:
+  - [sudo apt-get install -y git tmux byobu , "Installing packages"]
   - [git submodule update --init --recursive, "Updating submodules"]
-  - [mkdir -p ~/bin, "Creating bin folder"]
-  - [mkdir -p ~/.config, "Creating config folder"]
-  - [mkdir -p ~/devel, "Creating devel folder"]
   - [sudo pip install --upgrade virtualenv virtualenvwrapper cookiecutter, "Installing virtualenv and cookiecutter"]
+  - [mkdir -p ~/bin, "Creating bin folder"]
   - [mkdir -p ~/devel/venv, "Creating venv project folder"]
+  - [mkdir -p ~/devel, "Creating devel folder"]
 
 - link:
-    ~/.dotfiles: ''
-    ~/bin: bin
-    ~/.vim: vim/
-    ~/.vimrc: vimrc
-    ~/.tmux.conf: tmux.conf
-    ~/.ssh: ssh/
+  ~/.dotfiles: ''
+  ~/bin: bin
+  ~/.vim: vim/
+  ~/.vimrc: vimrc
+  ~/.ssh: ssh/
