@@ -1,0 +1,15 @@
+[Ordering Index Overrides]
+multiload=14
+indicator-cpufreq=13
+caffeine-cup-empty=12
+My-Weather-Indicator=11
+nm-applet=10
+indicator-keylock=9
+Touchpad-Indicator=8
+Sticky-Notes=7
+Diodon=6
+classicmenu-indicator=5
+gsd-keyboard-xkb=4
+gst-keyboard-xkb=3
+ibus=2
+gnome-power-manager=1
