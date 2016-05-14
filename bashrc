@@ -70,21 +70,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-##############################################################################
-
-function notify() {
-    local result=$([ $? = 0 ] && echo terminal || echo error)
-    local command=$(history | tail -n1 | sed -e 's/^\s*[0-9]\+\s*//;s/[;&|]\s*notify$//')
-    notify-send --urgency=low -i "$result" "$command"
-}
-
-# http://www.jayway.com/2012/11/27/configure-git-like-a-boss/
-# `g` is a shortcut for git, it defaults to `git s` (status) if no argument is given.
-function g() {
-    local cmd=${1-s}
-    shift
-    git $cmd $@
-}
+# Bash functions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+fi
 
 ##############################################################################
 
@@ -163,7 +152,18 @@ On_IWhite='\[\e[0;107m\]'   # White
 
 ##############################################################################
 
-PROMPT="$BBlack\t$Color_Off·$Green\h$Color_Off:$Cyan\w$Color_Off"
+# Load local git-prompt
+if [ -r "$HOME/bin/git-prompt.sh" ] ; then
+    source "$HOME/bin/git-prompt.sh"
+fi
+
+# rbenv
+# apt-get install rbenv
+if [ -d "$HOME/.rbenv" ] ; then
+    eval "$(rbenv init -)"
+fi
+
+PROMPT="$BBlack\t$Color_Off·$Blue\u$Purple@$Green\h$Color_Off:$Cyan\w$Color_Off"
 POST_PROMPT="\$ "
 
 function prompt_jobs() {
@@ -208,7 +208,6 @@ function bash_prompt() {
     PS1="$(prompt_precmd)${PROMPT}$(prompt_chroot)$(prompt_virtualenv)$(prompt_git)$(prompt_jobs)${POST_PROMPT}"
     PS2='continue-> '
     PS4='$0.$LINENO+ '
-
     case $TERM in
     xterm*|rxvt*)
       TITLEBAR='\[\033]0;\u@\h:\w\007\]'
@@ -219,4 +218,17 @@ function bash_prompt() {
     esac
 }
 export PROMPT_COMMAND=bash_prompt
+
+# Load autoenv
+# https://github.com/kennethreitz/autoenv
+# pip install autoenv
+if [ -r ~/bin/autoenv.sh ] ; then
+    source ~/bin/autoenv.sh
+fi
+
+# Load the custom .*-pass I have
+for p in $HOME/.*-pass; do
+    [ -e "${p}/.load.bash" ] && source "${p}/.load.bash"
+done
+
 
