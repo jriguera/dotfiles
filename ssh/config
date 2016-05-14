@@ -1,12 +1,28 @@
-Host bitbucket.org
-  HostName bitbucket.org
-  User XXXX
-  IdentityFile ~/.ssh/XXXX
-
 Host github.com
   HostName github.com
-  User XXXX
-  IdentityFile ~/.ssh/XXXX
+  User jriguera@gmail.com
+  VisualHostKey no
+  StrictHostKeyChecking yes
+
+Host bitbucket.org
+  HostName bitbucket.org
+  User jose.riguera@springer.com
+  VisualHostKey no
+  StrictHostKeyChecking yes
+
+Host 10.230.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+Host pe-*
+  User nsaadmin
+  VisualHostKey no
+  StrictHostKeyChecking yes
+
+Host spr-*
+  User nsaadmin
+  VisualHostKey no
+  StrictHostKeyChecking yes
 
 ### default for all ##
 Host *
@@ -22,10 +38,16 @@ Host *
     ForwardX11 no
     ForwardX11Trusted yes
     ServerAliveInterval 120
-    IdentityFile ~/.ssh/%r.id_rsa
+    IdentityFile ~/.ssh/%r.rsa
+    IdentityFile ~/.ssh/%h-%r.rsa
+#   IdentityFile ~/.ssh/%n-%r.rsa
+    IdentityFile ~/.ssh/%h.rsa
+#   IdentityFile ~/.ssh/%n.rsa
+    IdentityFile ~/.ssh/%r.rsa
     IdentityFile ~/.ssh/id_rsa
 #   StrictHostKeyChecking no
 #   UserKnownHostsFile /dev/null
+
 
 # General Tweaks and Connection Items
 # Some other tweaks that you may wish to configure on a broad level,
