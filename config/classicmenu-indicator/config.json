@@ -1,0 +1,11 @@
+{
+    "include_nodisplay": false,
+    "menu_icons": true,
+    "menus": [
+        "gnome-applications.menu"
+    ],
+    "my_icon": "start-here",
+    "use_all_apps_menu": false,
+    "use_extra_menus": true,
+    "use_tooltips": true
+}
