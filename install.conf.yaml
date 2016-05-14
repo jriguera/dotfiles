@@ -1,17 +1,48 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+      relative: true
+
 - clean: 
   - '~'
 
 - shell:
-  - [sudo apt-get install -y git tmux byobu , "Installing packages"]
-  - [git submodule update --init --recursive, "Updating submodules"]
-  - [sudo pip install --upgrade virtualenv virtualenvwrapper cookiecutter, "Installing virtualenv and cookiecutter"]
-  - [mkdir -p ~/bin, "Creating bin folder"]
-  - [mkdir -p ~/devel/venv, "Creating venv project folder"]
+  - [sudo apt-get install -y procps git tmux byobu conky-all vim tree curl dstat lsof rsync tcpdump htop iotop iptraf iftop ethtool ngrep nmon nmap nethogs iptstate lshw xsel rbenv pass virtualenv virtualenvwrapper virtualenv-clone cookiecutter colortail, "Installing packages"]
   - [mkdir -p ~/devel, "Creating devel folder"]
+  - [mkdir -p ~/devel/venv, "Creating venv project folder"]
+  - [mkdir -p ~/.ssh && chmod 0700 ~/.ssh, "Creating ssh folder"]
+  - [mkdir -p ~/.config, "Creating config folder"]
+  - [cp -a bin/* ~/bin/, "Populating bin folder"]
 
 - link:
-  ~/.dotfiles: ''
-  ~/bin: bin
-  ~/.vim: vim/
-  ~/.vimrc: vimrc
-  ~/.ssh: ssh/
+    ~/.bashrc: bashrc
+    ~/.bash_aliases: bash_aliases
+    ~/.bash_logout: bash_logout
+    ~/.bash_profile: bash_profile
+    ~/.bash_functions: bash_functions
+    ~/.profile: profile
+    ~/.xprofile: xprofile
+    ~/.xinitrc: xinitrc
+    ~/.vimrc: vimrc
+    ~/.vim: vim
+    ~/.gitconfig: gitconfig
+    ~/.conkyrc: conkyrc
+    ~/.conky: conky
+    ~/.byobu: byobu
+    ~/.config/autostart:
+      path: config/autostart
+      relink: true
+    ~/.ssh/config:
+      path: ssh/config
+      force: false
+      relink: true
+
+
+- shell:
+  - [vim +PluginInstall +qall, "Installing vim plugins"]
+  - [rbenv init -, "Initializing rbenv"]
+  - [mkdir -p ~/.ssh/multiplex, "Creating multiplex ssh folder"]
+# - [sudo pip install --upgrade virtualenv virtualenvwrapper cookiecutter, "Installing virtualenv and cookiecutter"]
+
+
