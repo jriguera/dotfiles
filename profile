@@ -12,54 +12,24 @@ if [ -d "$HOME/bin" ] ; then
     export PATH="$PATH:$HOME/bin"
 fi
 
-if [ -d "$HOME/.rvm" ] ; then
-    # Load RVM into a shell session *as a function*
-    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# For git-prompt
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_DESCRIBE_STYLE="branch"
+export GIT_PS1_SHOWUPSTREAM="auto git verbose"
+export GIT_PS1_STATESEPARATOR=" "
 
-    # Add RVM to PATH for scripting
-    export PATH="$PATH:$HOME/.rvm/bin"
-fi
-
-# Load git-prompt
-if [ -r "$HOME/.git-prompt.sh" ] ; then
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    export GIT_PS1_SHOWSTASHSTATE=1
-    export GIT_PS1_SHOWUNTRACKEDFILES=1
-    export GIT_PS1_SHOWCOLORHINTS=1
-    export GIT_PS1_DESCRIBE_STYLE="branch"
-    export GIT_PS1_SHOWUPSTREAM="auto git verbose"
-    export GIT_PS1_STATESEPARATOR=" "
-
-    source "$HOME/.git-prompt.sh"
-fi
-
-# Load virtualenvwrapper
-# pip install --upgrade virtualenv virtualenvwrapper
-if [ -r /usr/local/bin/virtualenvwrapper.sh ] ; then
-    export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-    export WORKON_HOME=$HOME/.virtualenvs
-    export PROJECT_HOME=$HOME/devel/venvs
-
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-# Load autoenv
-# https://github.com/kennethreitz/autoenv
-# pip install autoenv
-if [ -r /usr/local/bin/activate.sh ] ; then
-    source /usr/local/bin/activate.sh
-fi
+# For python virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/devel/venvs
 
 export DEBEMAIL="jriguera@gmail.com"
 export DEBFULLNAME="Jose Riguera"
-
 export EDITOR=vim
-
-if [ -n "$DISPLAY" ]; then
-    export BROWSER=firefox
-else 
-    export BROWSER=links
-fi
+[ -n "$DISPLAY" ] && export BROWSER=firefox || export BROWSER=links
 
 # enable byobu
 if [ -r /usr/bin/byobu-launch ] ; then
