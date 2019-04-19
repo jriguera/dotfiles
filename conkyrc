@@ -26,6 +26,9 @@ border_inner_margin 0
 border_outer_margin 0
 alignment tr
 
+# Monitor
+xinerama_head 1
+
 draw_shades no
 draw_outline no
 draw_borders no

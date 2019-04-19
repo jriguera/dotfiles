@@ -35,3 +35,8 @@ export EDITOR=vim
 if [ -r /usr/bin/byobu-launch ] ; then
     _byobu_sourced=1 . /usr/bin/byobu-launch
 fi
+
+# Go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/devel/golang
+export PATH=$GOROOT/bin:$PATH

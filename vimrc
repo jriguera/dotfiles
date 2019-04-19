@@ -219,6 +219,9 @@ autocmd VimEnter * set vb t_vb=
 " Highlight whitespaces for you in a convenient way
 set list listchars=tab:»·,trail:·,nbsp:⎵,eol:⏎,extends:>
 
+" set switchbuf=newtab 
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enter visual line mode with <Space><Space>

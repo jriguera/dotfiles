@@ -8,7 +8,7 @@
   - '~'
 
 - shell:
-  - [sudo apt-get install -y procps git tmux byobu conky-all vim tree curl dstat lsof rsync tcpdump htop iotop iptraf iftop ethtool ngrep nmon nmap nethogs iptstate lshw xsel rbenv pass virtualenv virtualenvwrapper virtualenv-clone cookiecutter colortail, "Installing packages"]
+  - [sudo apt-get install -y procps git tmux byobu conky-all vim tree curl dstat lsof rsync tcpdump htop iotop iptraf iftop ethtool ngrep nmon nmap nethogs iptstate lshw xsel rbenv pass virtualenv virtualenvwrapper virtualenv-clone colortail, "Installing packages"]
   - [mkdir -p ~/devel, "Creating devel folder"]
   - [mkdir -p ~/devel/venv, "Creating venv project folder"]
   - [mkdir -p ~/.ssh && chmod 0700 ~/.ssh, "Creating ssh folder"]
@@ -42,7 +42,6 @@
 - shell:
   - [vim +PluginInstall +qall, "Installing vim plugins"]
   - [rbenv init -, "Initializing rbenv"]
-  - [mkdir -p ~/.ssh/multiplex, "Creating multiplex ssh folder"]
-# - [sudo pip install --upgrade virtualenv virtualenvwrapper cookiecutter, "Installing virtualenv and cookiecutter"]
+  - [mkdir -p ~/.ssh/mtpx, "Creating multiplex ssh folder"]
 
 
